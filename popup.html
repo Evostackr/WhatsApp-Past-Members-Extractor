@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Past Member Extractor</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>Past Member Extractor</h1>
+                    <p id="groupTitle">Member Changes (Last 60 Days)</p>
+                </div>
+            </div>
+            <div class="badge-status" id="connectionStatus">Ready</div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Welcome / Trigger Box -->
+            <div id="welcomeState" class="welcome-box">
+                <div class="instruction-banner">
+                    <div class="banner-title">⚡ Instant Past Member Extraction</div>
+                    <p class="banner-desc">Extracts all contacts who <b>Left the group</b> or were <b>Removed by Admin</b> in Member Changes.</p>
+                </div>
+                <button id="startExtractBtn" class="btn btn-amber">
+                    <span>⚡</span> Extract Past Members
+                </button>
+            </div>
+
+            <!-- Progress State -->
+            <div id="progressState" class="progress-box" style="display: none;">
+                <div class="spinner-ring"></div>
+                <div class="progress-info">
+                    <p id="progressText">Opening Member changes & scanning...</p>
+                    <div class="progress-bar-track">
+                        <div id="progressBar" class="progress-bar-fill" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsState" class="results-section" style="display: none;">
+                <!-- Summary Stats Bar -->
+                <div class="stats-grid">
+                    <div class="stat-card" data-filter="all">
+                        <span class="stat-num" id="totalPastCount">0</span>
+                        <span class="stat-label">Total Past</span>
+                    </div>
+                    <div class="stat-card stat-left" data-filter="left">
+                        <span class="stat-num" id="leftCount">0</span>
+                        <span class="stat-label">Left Group</span>
+                    </div>
+                    <div class="stat-card stat-removed" data-filter="removed">
+                        <span class="stat-num" id="removedCount">0</span>
+                        <span class="stat-label">Removed</span>
+                    </div>
+                </div>
+
+                <!-- Toolbar & Filter -->
+                <div class="toolbar">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search past numbers or dates...">
+                    </div>
+                    <div class="filter-chips">
+                        <button class="chip active" data-filter="all">All Past</button>
+                        <button class="chip chip-left" data-filter="left">Left Group</button>
+                        <button class="chip chip-removed" data-filter="removed">Removed</button>
+                    </div>
+                </div>
+
+                <!-- Past Members List Preview -->
+                <div class="contact-list" id="contactListContainer">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Export Bar -->
+                <div class="export-tray">
+                    <div class="export-tray-title">Export Past Members</div>
+                    <div class="export-buttons-grid">
+                        <button id="exportCsvBtn" class="btn btn-export">
+                            <span>📄</span> CSV
+                        </button>
+                        <button id="exportVcfBtn" class="btn btn-export btn-vcf">
+                            <span>📇</span> vCard (VCF)
+                        </button>
+                        <button id="exportExcelBtn" class="btn btn-export">
+                            <span>📊</span> Excel
+                        </button>
+                    </div>
+                    <div class="copy-bar">
+                        <button id="copyNumbersBtn" class="btn btn-copy">
+                            📋 Copy All Phone Numbers
+                        </button>
+                        <button id="reScanBtn" class="btn btn-text">
+                            ↻ Re-Scan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span>Runs 100% locally in your browser.</span>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="export-utils.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "WhatsApp Past Member Extractor (Member Changes)",
+  "version": "3.0.0",
+  "description": "Extract all past members (who left or were removed in Member Changes) from WhatsApp Web groups.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Extract Past Members (Member Changes)"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "export-utils.js"
+      ],
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "export-utils.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
